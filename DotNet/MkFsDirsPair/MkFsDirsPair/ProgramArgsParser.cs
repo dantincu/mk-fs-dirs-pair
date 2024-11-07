@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace MkFsDirsPair
@@ -19,7 +20,8 @@ namespace MkFsDirsPair
             { ProgramArgs.Flag.WorkDir, "wk" },
             { ProgramArgs.Flag.RenameFromMdFile, "rn" },
             { ProgramArgs.Flag.RenameFromMdFile, "rk" },
-            { ProgramArgs.Flag.CreateFilesDirPair, "nf" }
+            { ProgramArgs.Flag.CreateFilesDirPair, "nf" },
+            { ProgramArgs.Flag.Recursive, "rc" }
         };
 
         public ProgramArgs Parse(string[] args)
@@ -49,6 +51,14 @@ namespace MkFsDirsPair
                             break;
                         case ProgramArgs.Flag.CreateFilesDirPair:
                             pga.CreateFileDirsPair = true;
+                            break;
+                        case ProgramArgs.Flag.Recursive:
+                            pga.RecursiveDirNameRegexStr = item.Value ?? throw new InvalidOperationException(
+                                $"The {nameof(ProgramArgs.Flag.Recursive)} flag must be provided along with a regular expression string");
+
+                            pga.RecursiveDirNameRegex = new Regex(
+                                pga.RecursiveDirNameRegexStr);
+
                             break;
                         default:
                             throw new NotSupportedException(

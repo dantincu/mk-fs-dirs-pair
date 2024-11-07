@@ -34,14 +34,43 @@ namespace MkFsDirsPair
         private void RunRename(
             ProgramArgs pga)
         {
+            if (pga.RecursiveDirNameRegex != null)
+            {
+                var dirNamesArr = Directory.GetDirectories(
+                    pga.WorkDir).Select(
+                        dir => Path.GetFileName(dir)).Where(
+                    dir => pga.RecursiveDirNameRegex.IsMatch(dir)).ToArray();
+
+                foreach (var dirName in dirNamesArr)
+                {
+                    var childPga = new ProgramArgs(pga)
+                    {
+                        WorkDir = Path.Combine(
+                            pga.WorkDir,
+                            dirName)
+                    };
+
+                    RunRename(childPga);
+                    RunRenameCore(childPga);
+                }
+            }
+            else
+            {
+                RunRenameCore(pga);
+            }
+        }
+
+        private void RunRenameCore(
+            ProgramArgs pga)
+        {
             var pair = GetDirsPairEntries(pga);
             pga.Title ??= ExtractTitle(pga, pair);
 
             NormalizeEntryNames(pga, pair);
-            RunRename(pga, pair);
+            RunRenameCore(pga, pair);
         }
 
-        private void RunRename(
+        private void RunRenameCore(
             ProgramArgs pga,
             DirsPairEntries pair)
         {
