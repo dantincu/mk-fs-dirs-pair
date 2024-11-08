@@ -19,7 +19,7 @@ namespace MkFsDirsPair
         {
             { ProgramArgs.Flag.WorkDir, "wk" },
             { ProgramArgs.Flag.RenameFromMdFile, "rn" },
-            { ProgramArgs.Flag.RenameFromMdFile, "rk" },
+            { ProgramArgs.Flag.RenameFromKeepFile, "rk" },
             { ProgramArgs.Flag.CreateFilesDirPair, "nf" },
             { ProgramArgs.Flag.Recursive, "rc" }
         };
@@ -51,6 +51,8 @@ namespace MkFsDirsPair
                             break;
                         case ProgramArgs.Flag.CreateFilesDirPair:
                             pga.CreateFileDirsPair = true;
+                            pga.FilePairShortDirName = item.Value ?? throw new InvalidOperationException(
+                                $"The {nameof(ProgramArgs.Flag.CreateFilesDirPair)} flag must be provided along with the short dir name for the files pair");
                             break;
                         case ProgramArgs.Flag.Recursive:
                             pga.RecursiveDirNameRegexStr = item.Value ?? throw new InvalidOperationException(
@@ -100,8 +102,8 @@ namespace MkFsDirsPair
                 if (!Path.IsPathRooted(pga.WorkDir))
                 {
                     pga.WorkDir = Path.Combine(
-                        pga.WorkDir,
-                        Directory.GetCurrentDirectory());
+                        Directory.GetCurrentDirectory(),
+                        pga.WorkDir);
                 }
             }
 
@@ -162,7 +164,7 @@ namespace MkFsDirsPair
                 FlagName = flagName,
                 Flag = isFlag ? PgaFlagsMap.Single(kvp => kvp.Value == flagName).Key : null,
                 IsFlag = isFlag,
-                Value = isFlag ? flagParts!.Skip(1).FirstOrDefault() : arg
+                Value = isFlag ? string.Join(":", flagParts!.Skip(1)) : arg
             };
 
             return item;

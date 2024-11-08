@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MkFsDirsPair
 {
-    internal class ProgramComponent
+    public class ProgramComponent
     {
         public const string DIRS_PAIR_JOIN_STR = "-";
         public const string KEEP_FILE_NAME = ".keep";
@@ -47,7 +47,9 @@ namespace MkFsDirsPair
                     {
                         WorkDir = Path.Combine(
                             pga.WorkDir,
-                            dirName)
+                            dirName),
+                        Title = null,
+                        RenameFromKeepFile = false,
                     };
 
                     RunRename(childPga);
@@ -140,6 +142,7 @@ namespace MkFsDirsPair
                     new()
                     {
                         Pga = pga,
+                        PrDirPath = pga.WorkDir,
                         DirsPairTitle = pga.Title,
                         ShortDirName = pga.ShortDirName,
                         FullDirNamePart = fullDirNamePart
@@ -213,7 +216,7 @@ namespace MkFsDirsPair
                     Pga = pga,
                     PrDirPath = prDirPath,
                     DirsPairTitle = FILES_DIR_TITLE,
-                    ShortDirName = pga.ShortDirName,
+                    ShortDirName = pga.FilePairShortDirName,
                     FullDirNamePart = FILES_DIR_NAME,
                 });
 
@@ -288,7 +291,7 @@ namespace MkFsDirsPair
                 FullDirName = fullDirName,
                 MdFileName = mdFileName,
                 FullDirPath = Path.Combine(
-                    pga.WorkDir,
+                    prDirPath,
                     fullDirName),
                 MdFilePath = Path.Combine(
                     pga.WorkDir,
@@ -318,10 +321,10 @@ namespace MkFsDirsPair
 
             if (pga.RenameFromKeepFile || (
                 pair.FirstMdLine?.StartsWith(
-                    "# ") ?? false))
+                    "# ") ?? false) == false)
             {
                 pair.KeepFilePath ??= Path.Combine(
-                    pair.PrDirPath,
+                    pair.FullDirPath,
                     KEEP_FILE_NAME);
 
                 title = File.ReadAllText(
@@ -364,9 +367,14 @@ namespace MkFsDirsPair
                 pair.NewFullDirPath,
                 KEEP_FILE_NAME);
 
+            pair.NewMdFileName = string.Concat(
+                MD_FILE_NAME_PFX_STR,
+                pair.NewFullDirNamePart,
+                MD_FILE_NAME_SFFX_STR);
+
             pair.NewMdFilePath = Path.Combine(
                 pga.WorkDir,
-                pair.NewMdFilePath);
+                pair.NewMdFileName);
         }
 
         private class DirsPairEntries

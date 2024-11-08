@@ -8,7 +8,7 @@ using System.Web;
 
 namespace MkFsDirsPair
 {
-    internal static class UtilsH
+    public static class UtilsH
     {
         public static readonly string NwLn = Environment.NewLine;
 

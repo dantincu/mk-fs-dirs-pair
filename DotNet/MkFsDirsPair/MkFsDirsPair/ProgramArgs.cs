@@ -37,6 +37,7 @@ namespace MkFsDirsPair
         public bool IsRename { get; set; }
         public bool RenameFromKeepFile { get; set; }
         public bool CreateFileDirsPair { get; set; }
+        public string? FilePairShortDirName { get; set; }
         public string? RecursiveDirNameRegexStr { get; set; }
         public Regex? RecursiveDirNameRegex { get; set; }
         public string? Title { get; set; }
