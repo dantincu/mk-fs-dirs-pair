@@ -9,6 +9,7 @@ namespace MkFsDirsPair
 {
     internal class ProgramArgsParser
     {
+        public const string DIRS_PAIR_JOIN_STR = "-";
         public const string FLAG_START_DELIM_STR = ":";
 
         public static readonly string FlagStartDblDelimStr = string.Concat(
@@ -91,7 +92,7 @@ namespace MkFsDirsPair
                 }
             }
 
-            pga.DirsPairJoinStr ??= ProgramComponent.DIRS_PAIR_JOIN_STR;
+            pga.DirsPairJoinStr ??= DIRS_PAIR_JOIN_STR;
 
             if (string.IsNullOrWhiteSpace(pga.WorkDir))
             {

@@ -8,7 +8,6 @@ namespace MkFsDirsPair
 {
     public class ProgramComponent
     {
-        public const string DIRS_PAIR_JOIN_STR = "-";
         public const string KEEP_FILE_NAME = ".keep";
         public const string MD_FILE_NAME_PFX_STR = "0-";
         public const string MD_FILE_NAME_SFFX_STR = "[note].md";
