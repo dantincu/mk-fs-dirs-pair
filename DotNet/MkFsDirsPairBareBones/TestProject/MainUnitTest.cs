@@ -504,5 +504,494 @@ namespace TestProject
                 })
             });
         }
+
+        [Fact]
+        public void ReorderIdxesTest1()
+        {
+            PerformTest(new FsEntriesTestArgs([":ux:999-400:899-400"], [
+                new ()
+                {
+                    Name = "899",
+                    IsFolder = true,
+                    FolderFiles = [
+                        new ()
+                        {
+                            Name = "0-Europa League[note].md",
+                            FileTextContentLines = [
+                                "# Europa League",
+                                "",
+                                ""]
+                        }]
+                },
+                new ()
+                {
+                    Name = "899-Europa League",
+                    IsFolder = true,
+                    FolderFiles = [
+                        new ()
+                        {
+                            Name = ".keep",
+                            FileTextContent = "Europa League"
+                        }]
+                },
+                new ()
+                {
+                    Name = "898",
+                    IsFolder = true,
+                    FolderFiles = [
+                        new ()
+                        {
+                            Name = "0-Champions League[note].md",
+                            FileTextContentLines = [
+                                "# Champions League",
+                                "",
+                                ""]
+                        }]
+                },
+                new ()
+                {
+                    Name = "898-Champions League",
+                    IsFolder = true,
+                    FolderFiles = [
+                        new ()
+                        {
+                            Name = ".keep",
+                            FileTextContent = "Champions League"
+                        }]
+                },
+                new ()
+                {
+                    Name = "897",
+                    IsFolder = true,
+                    FolderFiles = [
+                        new ()
+                        {
+                            Name = "0-Lionel Messi[note].md",
+                            FileTextContentLines = [
+                                "# Lionel Messi",
+                                "",
+                                ""]
+                        }]
+                },
+                new ()
+                {
+                    Name = "897-Lionel Messi",
+                    IsFolder = true,
+                    FolderFiles = [
+                        new ()
+                        {
+                            Name = ".keep",
+                            FileTextContent = "Lionel Messi"
+                        }]
+                },
+                new ()
+                {
+                    Name = "896",
+                    IsFolder = true,
+                    FolderFiles = [
+                        new ()
+                        {
+                            Name = "0-Cristiano Ronaldo[note].md",
+                            FileTextContentLines = [
+                                "# Cristiano Ronaldo",
+                                "",
+                                ""]
+                        }]
+                },
+                new () {
+                    Name = "896-Cristiano Ronaldo",
+                    IsFolder = true,
+                    FolderFiles = [
+                        new ()
+                        {
+                            Name = ".keep",
+                            FileTextContent = "Cristiano Ronaldo"
+                        }]
+                },
+                new ()
+                {
+                    Name = "895",
+                    IsFolder = true,
+                    FolderFiles = [
+                        new ()
+                        {
+                            Name = "0-Zinedine Zidane[note].md",
+                            FileTextContentLines = [
+                                "# Zinedine Zidane",
+                                "",
+                                ""]
+                        }]
+                },
+                new () {
+                    Name = "895-Zinedine Zidane",
+                    IsFolder = true,
+                    FolderFiles = [
+                        new ()
+                        {
+                            Name = ".keep",
+                            FileTextContent = "Zinedine Zidane"
+                        }]
+                },
+                new ()
+                {
+                    Name = "894",
+                    IsFolder = true,
+                    FolderFiles = [
+                        new ()
+                        {
+                            Name = "0-Ronaldo Nazario[note].md",
+                            FileTextContentLines = [
+                                "# Ronaldo Nazario",
+                                "",
+                                ""]
+                        }]
+                },
+                new () {
+                    Name = "894-Ronaldo Nazario",
+                    IsFolder = true,
+                    FolderFiles = [
+                        new ()
+                        {
+                            Name = ".keep",
+                            FileTextContent = "Ronaldo Nazario"
+                        }]
+                }
+            ], true, tempDirPath =>
+            {
+                var component = new ProgramComponent();
+                component.Run([$":wk:{TEMP_DIR_NAME}", "Europa League", "998"]);
+                component.Run([$":wk:{TEMP_DIR_NAME}", "Champions League", "997"]);
+                component.Run([$":wk:{TEMP_DIR_NAME}", "Lionel Messi", "995"]);
+                component.Run([$":wk:{TEMP_DIR_NAME}", "Cristiano Ronaldo", "994"]);
+                component.Run([$":wk:{TEMP_DIR_NAME}", "Zinedine Zidane", "992"]);
+                component.Run([$":wk:{TEMP_DIR_NAME}", "Ronaldo Nazario", "991"]);
+            }));
+        }
+
+        [Fact]
+        public void ReorderIdxesTest2()
+        {
+            PerformTest(new FsEntriesTestArgs([":ux:999-400"], [
+                new ()
+                {
+                    Name = "999",
+                    IsFolder = true,
+                    FolderFiles = [
+                        new ()
+                        {
+                            Name = "0-Europa League[note].md",
+                            FileTextContentLines = [
+                                "# Europa League",
+                                "",
+                                ""]
+                        }]
+                },
+                new ()
+                {
+                    Name = "999-Europa League",
+                    IsFolder = true,
+                    FolderFiles = [
+                        new ()
+                        {
+                            Name = ".keep",
+                            FileTextContent = "Europa League"
+                        }]
+                },
+                new ()
+                {
+                    Name = "998",
+                    IsFolder = true,
+                    FolderFiles = [
+                        new ()
+                        {
+                            Name = "0-Champions League[note].md",
+                            FileTextContentLines = [
+                                "# Champions League",
+                                "",
+                                ""]
+                        }]
+                },
+                new ()
+                {
+                    Name = "998-Champions League",
+                    IsFolder = true,
+                    FolderFiles = [
+                        new ()
+                        {
+                            Name = ".keep",
+                            FileTextContent = "Champions League"
+                        }]
+                },
+                new ()
+                {
+                    Name = "997",
+                    IsFolder = true,
+                    FolderFiles = [
+                        new ()
+                        {
+                            Name = "0-Lionel Messi[note].md",
+                            FileTextContentLines = [
+                                "# Lionel Messi",
+                                "",
+                                ""]
+                        }]
+                },
+                new ()
+                {
+                    Name = "997-Lionel Messi",
+                    IsFolder = true,
+                    FolderFiles = [
+                        new ()
+                        {
+                            Name = ".keep",
+                            FileTextContent = "Lionel Messi"
+                        }]
+                },
+                new ()
+                {
+                    Name = "996",
+                    IsFolder = true,
+                    FolderFiles = [
+                        new ()
+                        {
+                            Name = "0-Cristiano Ronaldo[note].md",
+                            FileTextContentLines = [
+                                "# Cristiano Ronaldo",
+                                "",
+                                ""]
+                        }]
+                },
+                new () {
+                    Name = "996-Cristiano Ronaldo",
+                    IsFolder = true,
+                    FolderFiles = [
+                        new ()
+                        {
+                            Name = ".keep",
+                            FileTextContent = "Cristiano Ronaldo"
+                        }]
+                },
+                new ()
+                {
+                    Name = "995",
+                    IsFolder = true,
+                    FolderFiles = [
+                        new ()
+                        {
+                            Name = "0-Zinedine Zidane[note].md",
+                            FileTextContentLines = [
+                                "# Zinedine Zidane",
+                                "",
+                                ""]
+                        }]
+                },
+                new () {
+                    Name = "995-Zinedine Zidane",
+                    IsFolder = true,
+                    FolderFiles = [
+                        new ()
+                        {
+                            Name = ".keep",
+                            FileTextContent = "Zinedine Zidane"
+                        }]
+                },
+                new ()
+                {
+                    Name = "994",
+                    IsFolder = true,
+                    FolderFiles = [
+                        new ()
+                        {
+                            Name = "0-Ronaldo Nazario[note].md",
+                            FileTextContentLines = [
+                                "# Ronaldo Nazario",
+                                "",
+                                ""]
+                        }]
+                },
+                new () {
+                    Name = "994-Ronaldo Nazario",
+                    IsFolder = true,
+                    FolderFiles = [
+                        new ()
+                        {
+                            Name = ".keep",
+                            FileTextContent = "Ronaldo Nazario"
+                        }]
+                }
+            ], true, tempDirPath =>
+            {
+                var component = new ProgramComponent();
+                component.Run([$":wk:{TEMP_DIR_NAME}", "Europa League", "998"]);
+                component.Run([$":wk:{TEMP_DIR_NAME}", "Champions League", "997"]);
+                component.Run([$":wk:{TEMP_DIR_NAME}", "Lionel Messi", "995"]);
+                component.Run([$":wk:{TEMP_DIR_NAME}", "Cristiano Ronaldo", "994"]);
+                component.Run([$":wk:{TEMP_DIR_NAME}", "Zinedine Zidane", "992"]);
+                component.Run([$":wk:{TEMP_DIR_NAME}", "Ronaldo Nazario", "991"]);
+            }));
+        }
+
+        [Fact]
+        public void ReorderIdxesTest3()
+        {
+            PerformTest(new FsEntriesTestArgs([":ux:999-900::899-400"], [
+                new ()
+                {
+                    Name = "899",
+                    IsFolder = true,
+                    FolderFiles = [
+                        new ()
+                        {
+                            Name = "0-Europa League[note].md",
+                            FileTextContentLines = [
+                                "# Europa League",
+                                "",
+                                ""]
+                        }]
+                },
+                new ()
+                {
+                    Name = "899-Europa League",
+                    IsFolder = true,
+                    FolderFiles = [
+                        new ()
+                        {
+                            Name = ".keep",
+                            FileTextContent = "Europa League"
+                        }]
+                },
+                new ()
+                {
+                    Name = "898",
+                    IsFolder = true,
+                    FolderFiles = [
+                        new ()
+                        {
+                            Name = "0-Champions League[note].md",
+                            FileTextContentLines = [
+                                "# Champions League",
+                                "",
+                                ""]
+                        }]
+                },
+                new ()
+                {
+                    Name = "898-Champions League",
+                    IsFolder = true,
+                    FolderFiles = [
+                        new ()
+                        {
+                            Name = ".keep",
+                            FileTextContent = "Champions League"
+                        }]
+                },
+                new ()
+                {
+                    Name = "897",
+                    IsFolder = true,
+                    FolderFiles = [
+                        new ()
+                        {
+                            Name = "0-Lionel Messi[note].md",
+                            FileTextContentLines = [
+                                "# Lionel Messi",
+                                "",
+                                ""]
+                        }]
+                },
+                new ()
+                {
+                    Name = "897-Lionel Messi",
+                    IsFolder = true,
+                    FolderFiles = [
+                        new ()
+                        {
+                            Name = ".keep",
+                            FileTextContent = "Lionel Messi"
+                        }]
+                },
+                new ()
+                {
+                    Name = "999",
+                    IsFolder = true,
+                    FolderFiles = [
+                        new ()
+                        {
+                            Name = "0-Cristiano Ronaldo[note].md",
+                            FileTextContentLines = [
+                                "# Cristiano Ronaldo",
+                                "",
+                                ""]
+                        }]
+                },
+                new () {
+                    Name = "999-Cristiano Ronaldo",
+                    IsFolder = true,
+                    FolderFiles = [
+                        new ()
+                        {
+                            Name = ".keep",
+                            FileTextContent = "Cristiano Ronaldo"
+                        }]
+                },
+                new ()
+                {
+                    Name = "998",
+                    IsFolder = true,
+                    FolderFiles = [
+                        new ()
+                        {
+                            Name = "0-Zinedine Zidane[note].md",
+                            FileTextContentLines = [
+                                "# Zinedine Zidane",
+                                "",
+                                ""]
+                        }]
+                },
+                new () {
+                    Name = "998-Zinedine Zidane",
+                    IsFolder = true,
+                    FolderFiles = [
+                        new ()
+                        {
+                            Name = ".keep",
+                            FileTextContent = "Zinedine Zidane"
+                        }]
+                },
+                new ()
+                {
+                    Name = "997",
+                    IsFolder = true,
+                    FolderFiles = [
+                        new ()
+                        {
+                            Name = "0-Ronaldo Nazario[note].md",
+                            FileTextContentLines = [
+                                "# Ronaldo Nazario",
+                                "",
+                                ""]
+                        }]
+                },
+                new () {
+                    Name = "997-Ronaldo Nazario",
+                    IsFolder = true,
+                    FolderFiles = [
+                        new ()
+                        {
+                            Name = ".keep",
+                            FileTextContent = "Ronaldo Nazario"
+                        }]
+                }
+            ], true, tempDirPath =>
+            {
+                var component = new ProgramComponent();
+                component.Run([$":wk:{TEMP_DIR_NAME}", "Europa League", "998"]);
+                component.Run([$":wk:{TEMP_DIR_NAME}", "Champions League", "997"]);
+                component.Run([$":wk:{TEMP_DIR_NAME}", "Lionel Messi", "995"]);
+                component.Run([$":wk:{TEMP_DIR_NAME}", "Cristiano Ronaldo", "894"]);
+                component.Run([$":wk:{TEMP_DIR_NAME}", "Zinedine Zidane", "892"]);
+                component.Run([$":wk:{TEMP_DIR_NAME}", "Ronaldo Nazario", "891"]);
+            }));
+        }
     }
 }
