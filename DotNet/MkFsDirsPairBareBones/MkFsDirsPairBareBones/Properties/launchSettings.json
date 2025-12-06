@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "MkFsDirsPairBareBones": {
+      "commandName": "Project",
+      "commandLineArgs": "qwer asdf"
+    }
+  }
+}

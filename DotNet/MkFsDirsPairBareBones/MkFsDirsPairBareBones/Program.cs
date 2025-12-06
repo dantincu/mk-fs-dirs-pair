@@ -287,6 +287,9 @@ namespace MkFsDirsPairBareBones
                     mdFilePath,
                     mdFileLinesArr);
 
+                UtilsH.OpenWithDefaultProgramIfNotNull(
+                    mdFilePath);
+
                 if (pga.CreateFileDirsPair)
                 {
                     CreateFileDirsPair(
